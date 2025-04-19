@@ -1,0 +1,78 @@
+<% layout('Layouts/boilerplate.ejs') %>
+<body>
+  <!-- Main Login Page HTML Code -->
+  <div class="container" id="pre-login">
+    <h1 class="mb-4">Signup To Our Platform</h1>
+    <form id="login-Form" action="/signup" method="POST">
+      <div class="row">
+        <div class="col-5 mb-3">
+          <label for="signupUserName" class="form-label">User Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="signupUserName"
+            name="signupUserName"
+            required
+          />
+        </div>
+        <div class="col-5 mb-3">
+          <label for="signupFullName" class="form-label">Full Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="signupFullName"
+            name="signupFullName"
+            required
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5 mb-3">
+          <label for="signupEmail" class="form-label">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="signupEmail"
+            name="signupEmail"
+            aria-describedby="emailHelp"
+            required
+          />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+        <div class="col-5 mb-3" style="position: relative">
+          <label for="signupPassword" class="form-label">Password</label>
+          <input
+            type="password"
+            id="Password"
+            style="padding-right: 40px; width: 100%"
+            class="form-control"
+            name="signupPassword"
+            aria-describedby="passwordHelp"
+            required
+          />
+          <!-- Eye Icon (Toggle) -->
+          <span
+            id="togglePassword"
+            style="
+              position: absolute;
+              top: 38px;
+              right: 20px;
+              cursor: pointer;
+              user-select: none;
+            "
+          >
+            👁️
+          </span>
+          <div id="passwordHelp" class="form-text">
+            Password Must Have Atleast 8 Chars.
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <script src="/js/PasswordToggleFeature.js"></script>
+</body>

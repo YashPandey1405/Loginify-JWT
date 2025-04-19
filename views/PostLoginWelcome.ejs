@@ -1,0 +1,25 @@
+<% layout('Layouts/boilerplate.ejs') %>
+
+<body>
+  <% if (flashMessage) { %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Holy guacamole!</strong> <%= flashMessage %>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  <% } %>
+  <!-- Main Login Page HTML Code -->
+  <div class="container mt-5">
+    <h1 class="mb-4">
+      Welcome <%= User.fullname %>, You're LoggedIn To Our Platform
+    </h1>
+    <p class="mb-4">Your UserId : <%= User._id %></p>
+    <p class="mb-4">Your UserName : <%= User.username %></p>
+    <p class="mb-4">Your email : <%= User.email %></p>
+    <p class="mb-4">Your refreshToken : <%= User.refreshToken %></p>
+  </div>
+</body>
