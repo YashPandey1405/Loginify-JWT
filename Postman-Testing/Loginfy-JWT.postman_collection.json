@@ -1,0 +1,112 @@
+{
+  "info": {
+    "_postman_id": "f0319bbd-8144-4dba-9d81-fa082d4b2fb4",
+    "name": "Loginfy-JWT",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "44251062"
+  },
+  "item": [
+    {
+      "name": "Login Folder",
+      "item": [
+        {
+          "name": "login",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"loginUserName\": \"YashPandey\",\r\n  \"loginEmail\": \"pandeyyash041@gmail.com\",\r\n  \"loginPassword\": \"yashpandey\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Signup Folder",
+      "item": [
+        {
+          "name": "signup",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "signup",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"signupUserName\": \"PrabhashPandey1405\",\r\n  \"signupFullName\": \"Prabhash Pandey\",\r\n  \"signupEmail\": \"pandeyprabhash1405@gmail.com\",\r\n  \"signupPassword\": \"prabhashpandey\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/signup",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["signup"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "LogOut Folder",
+      "item": [
+        {
+          "name": "logout",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Profile Page",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}
