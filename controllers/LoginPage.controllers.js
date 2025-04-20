@@ -1,4 +1,5 @@
 import { User } from "../models/user.models.js";
+import { sendEmail } from "../utils/mail.utils.js";
 
 // Common Method To Generate Access And Refresh Tokens....
 const generateAccessAndRefereshTokens = async (userId) => {
@@ -69,6 +70,9 @@ const LoginPagePostController = async (req, res) => {
     const loggedInUser = await User.findById(user._id).select(
       "-password -refreshToken "
     );
+
+    // Send a welcome email to the user after successful login....
+    sendEmail(loggedInUser.username, loggedInUser.email);
 
     // These Options Will Make The Cookie TO Be Only Accessible By The Server....
     // This means that the cookie cannot be accessed via JavaScript in the browser (e.g., document.cookie).
