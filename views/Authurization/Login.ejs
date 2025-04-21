@@ -1,6 +1,21 @@
 <% layout('Layouts/boilerplate.ejs') %>
 
 <body>
+  <% if (flashMessage) { %>
+  <div
+    class="alert alert-success alert-dismissible fade show mt-1 mb-1"
+    role="alert"
+  >
+    <strong>Thanks For using Loginify-JWT! , </strong> <%= flashMessage %>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  <% } %>
+
   <!-- Main Login Page HTML Code -->
   <div class="container" id="pre-login">
     <h1 class="mb-4">Login To Our Platform</h1>

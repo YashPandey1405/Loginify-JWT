@@ -3,6 +3,7 @@ import { User } from "../models/user.models.js";
 const UserPage = async (req, res) => {
   try {
     const flashMessage = req.cookies.flashMessage;
+
     // Remove the flash message after reading it
     res.clearCookie("flashMessage");
 

@@ -25,7 +25,14 @@ const generateAccessAndRefereshTokens = async (userId) => {
 
 const LoginPageShow = async (req, res) => {
   try {
-    res.render("Authurization/Login.ejs");
+    const flashMessage = req.cookies.flashMessage;
+
+    // Remove the flash message after reading it
+    res.clearCookie("flashMessage");
+
+    res.render("Authurization/Login.ejs", {
+      flashMessage: flashMessage, // Pass the flash message to EJS
+    });
   } catch (error) {
     console.error("Error rendering login page:", error);
     res.status(500).send("Internal Server Error");
@@ -119,9 +126,11 @@ const LogOutUserController = async (req, res) => {
     .status(200)
     .clearCookie("accessToken", options)
     .clearCookie("refreshToken", options)
-    .json({
-      message: "User logged Out",
-    });
+    .cookie("flashMessage", "You have successfully logged out", {
+      maxAge: 60000,
+      httpOnly: true,
+    })
+    .redirect("/login"); // Redirect to login page after logout
 };
 
 const refreshAccessToken = async (req, res) => {

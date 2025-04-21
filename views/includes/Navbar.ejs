@@ -4,7 +4,7 @@
 >
   <div class="container-fluid">
     <!-- Logo & Name on the Left -->
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/me">
       <i class="fas fa-feather-alt fa-xl" style="color: #1da1f2"></i>
       &nbsp; Loginify-JWT
     </a>
@@ -24,16 +24,23 @@
 
     <!-- Collapsible Content -->
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul
-        class="navbar-nav mb-2 mb-lg-0 ms-auto"
-        style="font-size: 1.2rem"
-      >
+      <ul class="navbar-nav mb-2 mb-lg-0 ms-auto" style="font-size: 1.2rem">
+        <!-- Adding Links Based On User Logged In Or Not -->
+        <% if (!validUser) { %>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/login">Login</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/signup">Signup</a>
         </li>
+        <% } %> <% if (validUser) { %>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/logout"
+            >Logout</a
+          >
+        </li>
+        <% } %>
+
         <!-- Theme Toggle Icon -->
         <li class="nav-item">
           <button id="themeToggle" class="btn ms-2">
