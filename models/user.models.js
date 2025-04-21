@@ -21,8 +21,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      lowecase: true,
+      lowercase: true,
       trim: true,
+    },
+    image: {
+      url: String,
+      filename: String,
     },
     password: {
       type: String,

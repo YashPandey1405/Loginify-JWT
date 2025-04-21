@@ -1,5 +1,9 @@
 import express from "express";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
+import multer from "multer";
+import { storage } from "../CloudConfig.js";
+
+const upload = multer({ storage });
 
 import {
   LoginPageShow,
@@ -7,10 +11,12 @@ import {
   LogOutUserController,
   refreshAccessToken,
 } from "../controllers/LoginPage.controllers.js";
+
 import {
   SignUpPageShow,
   SignUpPostController,
 } from "../controllers/SignUpPage.controllers.js";
+
 import { UserPage } from "../controllers/UserPage.controllers.js";
 
 const Router = express.Router();
@@ -25,7 +31,9 @@ Router.route("/").get(async (req, res) => {
 });
 
 Router.route("/login").get(LoginPageShow).post(LoginPagePostController);
-Router.route("/signup").get(SignUpPageShow).post(SignUpPostController);
+Router.route("/signup")
+  .get(SignUpPageShow)
+  .post(upload.single("image"), SignUpPostController);
 
 // These routes are protected and require JWT verification....
 Router.route("/logout").get(verifyJWT, LogOutUserController);

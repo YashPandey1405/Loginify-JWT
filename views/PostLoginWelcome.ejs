@@ -2,8 +2,11 @@
 
 <body>
   <% if (flashMessage) { %>
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Holy guacamole!</strong> <%= flashMessage %>
+  <div
+    class="alert alert-warning alert-dismissible fade show mt-1 mb-1"
+    role="alert"
+  >
+    <strong>Welcome To Loginify-JWT! , </strong> <%= flashMessage %>
     <button
       type="button"
       class="btn-close"
@@ -12,14 +15,45 @@
     ></button>
   </div>
   <% } %>
+
   <!-- Main Login Page HTML Code -->
-  <div class="container mt-5">
-    <h1 class="mb-4">
-      Welcome <%= User.fullname %>, You're LoggedIn To Our Platform
-    </h1>
-    <p class="mb-4">Your UserId : <%= User._id %></p>
-    <p class="mb-4">Your UserName : <%= User.username %></p>
-    <p class="mb-4">Your email : <%= User.email %></p>
-    <p class="mb-4">Your refreshToken : <%= User.refreshToken %></p>
+  <div class="container mt-3">
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1">
+      <% User.forEach(user => { %>
+      <!-- User Profile Card -->
+      <div class="col mb-5">
+        <div
+          class="card listing-card"
+          style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px"
+        >
+          <!-- User Image -->
+          <img
+            src="<%= user.image.url %>"
+            class="card-img-top"
+            alt="User Image"
+            style="width: 100%; height: 250px; object-fit: cover"
+          />
+
+          <div class="card-body mt-1">
+            <!-- User Details -->
+            <h5 class="card-title">Welcome, <%= user.fullname %></h5>
+            <p class="card-text">You're now a valued member of our platform!</p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>Your UserId:</strong> <%= user._id %>
+              </li>
+              <li class="list-group-item">
+                <strong>Your UserName:</strong> <%= user.username %>
+              </li>
+              <li class="list-group-item">
+                <strong>Your Email:</strong> <%= user.email %>
+              </li>
+            </ul>
+            <a href="#" class="btn btn-outline-primary mt-2">Go to Dashboard</a>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+    </div>
   </div>
 </body>

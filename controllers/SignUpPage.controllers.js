@@ -32,56 +32,82 @@ const SignUpPageShow = async (req, res) => {
 
 const SignUpPostController = async (req, res) => {
   try {
+    console.log("🚀 SignUpPostController called");
+    console.log("📝 Body:", req.body);
+    console.log("📸 File:", req.file);
+
     const { signupUserName, signupFullName, signupEmail, signupPassword } =
       req.body;
 
-    // Validate input fields....
-    if (!signupUserName || !signupFullName || !signupEmail || !signupPassword) {
+    // Check if the file was uploaded successfully
+    if (!req.file) {
+      return res.status(400).send("Image file is required.");
+    }
+
+    const imageUrl = req.file.path;
+    const imageFilename = req.file.filename;
+
+    console.log("✅ imageUrl:", imageUrl);
+    console.log("✅ imageFilename:", imageFilename);
+
+    // Validate input fields
+    if (
+      !signupUserName ||
+      !signupFullName ||
+      !signupEmail ||
+      !signupPassword ||
+      !imageUrl
+    ) {
       return res.status(400).send("All fields are required");
     }
 
-    // Check if the user exists in the database
-    const existingUser = await User.findOne({
-      username: signupUserName,
-    });
+    // Check if the user already exists
+    const existingUser = await User.findOne({ username: signupUserName });
 
-    // When the user is already found in the database....
     if (existingUser) {
-      res.status(409).send("Username already exists");
+      return res.status(409).send("Username already exists");
     }
 
     const newUser = await User.create({
       username: signupUserName,
       fullname: signupFullName,
       email: signupEmail,
+      image: {
+        url: imageUrl,
+        filename: imageFilename,
+      },
       password: signupPassword,
     });
 
-    // Regenerate the access and refresh tokens for the user....
+    // Generate tokens
     const { accessToken, refreshToken } = await generateAccessAndRefereshTokens(
       newUser._id
     );
 
+    // Get logged-in user info without password & refreshToken
     const loggedInUser = await User.findById(newUser._id).select(
-      "-password -refreshToken "
+      "-password -refreshToken"
     );
 
-    // These Options Will Make The Cookie TO Be Only Accessible By The Server....
-    // This means that the cookie cannot be accessed via JavaScript in the browser (e.g., document.cookie).
+    // Cookie options
     const options = {
       httpOnly: true,
       secure: true,
     };
 
-    // Set the refresh token in the cookie with HttpOnly and Secure flags....
+    // Set cookies and redirect
     return res
       .status(200)
       .cookie("accessToken", accessToken, options)
       .cookie("refreshToken", refreshToken, options)
-      .redirect("/me"); // Redirect to /me after setting cookies
+      .cookie("flashMessage", "Signup successful On The Website", {
+        maxAge: 60000,
+        httpOnly: true,
+      })
+      .redirect("/me");
   } catch (error) {
-    console.error("Error in SignUpPostController:", error);
-    res.status(500).send("Internal Server Error");
+    console.error("❌ Error in SignUpPostController:", error);
+    return res.status(500).send("Internal Server Error");
   }
 };
 

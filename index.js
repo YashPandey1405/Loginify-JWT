@@ -12,6 +12,18 @@ const app = express();
 
 dotenv.config();
 
+console.log(
+  "🚀 Environment Variables Loaded: ",
+  process.env.CLOUNDINARY_CLOUD_NAME
+);
+console.log(
+  "🚀 Environment Variables Loaded: ",
+  process.env.CLOUNDINARY_API_KEY
+);
+console.log(
+  "🚀 Environment Variables Loaded: ",
+  process.env.CLOUNDINARY_API_SECRET
+);
 // Define __dirname manually in ES module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
